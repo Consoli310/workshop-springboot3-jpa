@@ -1,5 +1,7 @@
 package com.consoli.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -15,11 +17,14 @@ public class Order implements Serializable {
     private Long id;
     private Instant moment;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
 
-    public Order(){}
+    public Order() {
+    }
 
     public Order(Long id, Instant moment, User client) {
         this.id = id;
